@@ -27,27 +27,34 @@ const loadImg = function(param) {
     })
     .then((response) => {
         if (response.ok) {
-            console.log('ok');
             return response.json();
         } else {
             throw new Error('Errore della pagina');
         }
     })
-    .then((page) => {
+    .then((page) =>{
         const cardsImg = document.querySelectorAll('.card > img');
+        const cardsTitle = document.querySelectorAll('.card-body > h5');
+        /* questo per cambiare il testo dello small con l'id della card */
         const textMuted = document.querySelectorAll('small');
-        const photoList = page.photos;
+        //console.log(textMuted);
 
-        for (let i = 0; i < Math.min(cardsImg.length, photoList.length); i++) {
+        const photoList = page.photos;
+       //console.log(photoList)
+        for ( let i = 0; cardsImg.length > i; i++){
             let url = photoList[i].src.large;
             let id = photoList[i].id;
+            let title = photoList[i].alt;
+            //console.log(cardsTitle[i]);
             cardsImg[i].src = url;
             textMuted[i].innerText = id;
+            cardsTitle[i].innerText = title;
         }
     })
     .catch((err) => {
         console.log('errore', err);
-    });
+    })
+    
 };
 
 // Event listeners per i pulsanti di caricamento immagini
@@ -64,7 +71,7 @@ for (let i = 0; i < HideBtn.length; i++) {
 // Event listener per la ricerca
 searchBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    const searchString = searchInput.value;
+    const searchString = searchInput.value.trim();
     if (searchString) {
         loadImg(searchString);
     } else {
