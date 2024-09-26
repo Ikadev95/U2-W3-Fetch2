@@ -1,5 +1,6 @@
 const imgBtn = document.getElementById('loadImgBtn');
 const imgBtn2 = document.getElementById('loadImgBtn2');
+const HideBtn = document.getElementsByClassName('hide');
 
 const loadImg = function(param){
     let imgUrl = '';
@@ -44,3 +45,9 @@ const loadImg = function(param){
 imgBtn.addEventListener('click', () => loadImg(1));
 imgBtn2.addEventListener('click', () => loadImg(2));
 
+
+for (let i = 0; HideBtn.length > i ; i++){
+    HideBtn[i].addEventListener('click',function(){
+        HideBtn[i].closest('.col-md-4').classList.add('d-none');
+    })
+}
