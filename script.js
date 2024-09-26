@@ -27,12 +27,18 @@ const loadImg = function(param){
     })
     .then((page) =>{
         const cardsImg = document.querySelectorAll('.card > img');
-        //console.log(cardsImg);
+
+        /* questo per cambiare il testo dello small con l'id della card */
+        const textMuted = document.querySelectorAll('small');
+        //console.log(textMuted);
+
         const photoList = page.photos;
-        console.log(photoList)
+       // console.log(photoList)
         for ( let i = 0; cardsImg.length > i; i++){
             let url = photoList[i].src.large;
+            let id = photoList[i].id;
             cardsImg[i].src = url;
+            textMuted[i].innerText = id;
         }
     })
     .catch((err) => {
@@ -41,10 +47,10 @@ const loadImg = function(param){
     
 }
 
+/* questo per nascondere le card con Hide */
 
 imgBtn.addEventListener('click', () => loadImg(1));
 imgBtn2.addEventListener('click', () => loadImg(2));
-
 
 for (let i = 0; HideBtn.length > i ; i++){
     HideBtn[i].addEventListener('click',function(){
