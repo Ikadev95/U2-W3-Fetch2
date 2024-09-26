@@ -3,6 +3,7 @@ const imgBtn2 = document.getElementById('loadImgBtn2');
 const HideBtn = document.getElementsByClassName('hide');
 const searchBtn = document.getElementById('search');
 const searchInput = document.getElementById('searchInput');
+const imgs = document.querySelectorAll('.card > img');
 
 const loadImg = function(param) {
     let imgUrl = '';
@@ -78,3 +79,16 @@ searchBtn.addEventListener('click', (e) => {
         alert("Inserisci un termine di ricerca valido.");
     }
 });
+
+const getDetails = function(img){
+    const card = img.closest('.card');
+    const id = card.querySelector('small').innerText;
+    console.log(id);
+    location.href = `./detail.html?imgId=${id}`;
+}
+
+for (let i = 0; i < imgs.length; i++) {
+    imgs[i].addEventListener('click', function() {
+        getDetails(this);  
+    });
+}
